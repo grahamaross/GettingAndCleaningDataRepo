@@ -93,9 +93,14 @@ saveSamsungMeansPerStepFive <- function(destfile,sd){ #parameter sd is the resul
   means <- aggregate(sd[,3:68],by=list(sd[,1],sd[,2]), FUN=mean, simplify=F)
   means[,2] <- as.character(means[,2])
   names(means)[1:2] <- c('Subject', 'Activity')
-  for (i in 3:68)
-    means[,i] <- means[,i][1]
-  write.table(means, file=destfile, quote=F, col.names=F, row.names=F)
+  # During this project I had difficulty using write.table to save this data.frame.
+  # Values in columns 3:68 were of type list, which made the use of write.table too complex.
+  # To overcome this problem this code creates a copy in "fixedMeans".
+  fixedMeans <- data.frame(1:180, "x")
+  for (k in 1:66) fixedMeans <- cbind(fixedMeans, 1:180)
+  for (i in 3:68) for (j in 1:180)
+    fixedMeans[j,i] <- means[j,i][1]
+  write.table(fixedMeans, file=destfile, quote=F, col.names=F, row.names=F)
 }
 
 doItAll <- function(destfile){
