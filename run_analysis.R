@@ -89,10 +89,12 @@ getSamsungData <- function(){
 }
 
 #Pass a pathname into which the file averages.txt will be created.
-saveSamsungMeansPerStepFive <- function(destfile,sd){ #parameter is the result of getSamsungData, above.
-  means <- aggregate(sd[,3:68],list(sd$Subject,sd$Activity), FUN=mean, simplify=F)
+saveSamsungMeansPerStepFive <- function(destfile,sd){ #parameter sd is the result of getSamsungData, above.
+  means <- aggregate(sd[,3:68],by=list(sd[,1],sd[,2]), FUN=mean, simplify=F)
   means[,2] <- as.character(means[,2])
-  #n.b.: Columns Subject and Activity in means have been renamed, but we discard column names in write.table.
+  names(means)[1:2] <- c('Subject', 'Activity')
+  for (i in 3:68)
+    means[,i] <- means[,i][1]
   write.table(means, file=destfile, quote=F, col.names=F, row.names=F)
 }
 
