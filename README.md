@@ -63,6 +63,8 @@ These notes assume that the reader is familiar with the Smartphone dataset as pr
 
 I have completely ignored the inertial data directories. The means and standard deviations provided in X_*.txt are usable. The purpose of the exercise is preparation of the data for downstream processes (i.e., tidying), not re-doing the computations of the original research team.
 
+Upon reading the data into a data.frame, the column names are changed to be legal in R. I decided to run with these defaults. This makes it as unambiguous as the system requires it to be. Though the names might look clumsy, there is nothing more to say about it, which is a virtue.
+
 The number of lines (rows) in the files subject_test.txt, X_test.txt, and y_test.txt are equal. It is as if a tidy dataset had been broken column-wise. The file subject_test.txt is the column indicating the person wearing the phone (the subject). The file y_test.txt is the column indicating the activity (e.g., WALKING). The same is true of the corresponding "_train" files. The columns can be joined using something like R's cbind().
 
 The number and organization of the columns in the "test" files is identical to the number and organization of the columns in the "train" files. It is as if a tidy dataset had been broken row-wise into two pieces. These rows can be "unioned" using something like R's rbind().
