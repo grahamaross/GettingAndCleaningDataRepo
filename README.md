@@ -20,6 +20,9 @@ To execute the script, in R-studio:
 > samsungData <- getSamsungData() #instruction steps 1-4  
 > samsungMeans <- getSamsungMeans() #instruction step 5
 
+To examine the contents of averages.txt (provided separately):
+> averages <- read.table("../averages.txt",header=T)
+
 ----------
 
 CONTENTS
